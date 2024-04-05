@@ -66,16 +66,17 @@ nvidia-smi
 echo GOOD LUCK
 ```
 
-## Environment setup
+## Environment setup - Tested on Ubuntu 20.04
 ```bash
+apt-get install ffmpeg # if you don't already have ffmpeg installed
+apt-get install espeak-ng # backend for the phonemizer installed below
+
 conda create -n voicecraft python=3.9.16
 conda activate voicecraft
 
 pip install -e git+https://github.com/facebookresearch/audiocraft.git@c5157b5bf14bf83449c17ea1eeb66c19fb4bc7f0#egg=audiocraft
 pip install xformers==0.0.22
 pip install torchaudio==2.0.2 torch==2.0.1 # this assumes your system is compatible with CUDA 11.7, otherwise checkout https://pytorch.org/get-started/previous-versions/#v201
-apt-get install ffmpeg # if you don't already have ffmpeg installed
-apt-get install espeak-ng # backend for the phonemizer installed below
 pip install tensorboard==2.16.2
 pip install phonemizer==3.2.1
 pip install datasets==2.16.0
@@ -85,8 +86,12 @@ conda install -c conda-forge montreal-forced-aligner=2.2.17 openfst=1.8.2 kaldi=
 # conda install pocl # above gives an warning for installing pocl, not sure if really need this
 
 # to run ipynb
+conda install -c conda-forge jupyterlab
 conda install -n voicecraft ipykernel --no-deps --force-reinstall
+pip install ipykernel
+python -m ipykernel install --user --name voicecraft --display-name "Python (voicecraft)"
 ```
+
 
 If you have encountered version issues when running things, checkout [environment.yml](./environment.yml) for exact matching.
 
